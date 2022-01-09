@@ -39,7 +39,6 @@ void pixelsCopy(pixel* src, pixel* dst);
 /*
  *  Applies kernel for pixel at (i,j)
  */
-
 static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], int kernelScale, bool filter) {
       if (kernel == blurKernel) {
           pixel_sum sum;
@@ -220,7 +219,7 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               current_pixel = src[min_row * dim + min_col];
-              //Decrease the sum colors with the current pixel's results.
+              //Decrease the sum colors by the current pixel's results.
               sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
               current_pixel = src[max_row*dim + max_col];
               sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
@@ -440,7 +439,7 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               current_pixel = src[min_row * dim + min_col];
-              //Decrease the sum colors with the current pixel's results.
+              //Decrease the sum colors by the current pixel's results.
               sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
               current_pixel = src[max_row*dim + max_col];
               sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;

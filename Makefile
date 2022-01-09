@@ -4,13 +4,13 @@ showBMP: showBMP.o readBMP.o writeBMP.o
 	gcc -g -pg -o showBMP readBMP.o writeBMP.o showBMP.o $(LDLIBS)
 
 readBMP.o: readBMP.c readBMP.h
-	gcc -o readBMP.o -c readBMP.c	
+	gcc -g -pg -o readBMP.o -c readBMP.c	
 
 writeBMP.o: writeBMP.c writeBMP.h readBMP.h
-	gcc -o writeBMP.o -c writeBMP.c
+	gcc -g -pg -o writeBMP.o -c writeBMP.c
 
 showBMP.o: showBMP.c myfunction.c
-	gcc -o showBMP.o -c showBMP.c
+	gcc -g -pg -o showBMP.o -c showBMP.c
 
 clean:
 	rm -f showBMP.o

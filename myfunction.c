@@ -86,6 +86,7 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
               pixel* pixel_Pointer = &src[sI * dim + sJ];
 
               //We start the loop here.
+
               //1.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
@@ -96,9 +97,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
               max_col = j;
               min_intensity = looped_pixel_intensity;
               max_intensity = looped_pixel_intensity;
+              pixel_Pointer++;
               j++;
+
               //2.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -111,9 +113,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //3.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -127,9 +130,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               i++;
+              pixel_Pointer += (dim - 2);
               j = sJ;
+
               //4.
-              pixel_Pointer += (dim - 2);
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -142,9 +146,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //5.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -157,9 +162,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
-              j++;
-              //6.
               pixel_Pointer++;
+              j++;
+
+              //6.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -173,9 +179,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               i++;
-              j = sJ;
-              //7.
               pixel_Pointer += (dim - 2);
+              j = sJ;
+
+              //7.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -188,9 +195,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //8.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -203,9 +211,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //9.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -218,11 +227,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
-              current_pixel = src[min_row * dim + min_col];
-              //Decrease the sum colors by the current pixel's results.
-              sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
-              current_pixel = src[max_row*dim + max_col];
-              sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
+              pixel min_pixel = src[min_row * dim + min_col];
+              pixel max_pixel = src[max_row * dim + max_col];
+              sum.red -= (int) (min_pixel.red + max_pixel.red), sum.green -= (int) (min_pixel.green + max_pixel.green),
+              sum.blue -= (int) (min_pixel.blue + max_pixel.blue);
           }
           //Set the colors to their right value.
           if (sum.red >= 256 * kernelScale) {
@@ -306,6 +314,7 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
               int looped_pixel_intensity;
 
               //We start the loop here.
+
               //1.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
@@ -316,9 +325,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
               max_col = j;
               min_intensity = looped_pixel_intensity;
               max_intensity = looped_pixel_intensity;
+              pixel_Pointer++;
               j++;
+
               //2.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -331,9 +341,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //3.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -347,9 +358,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               i++;
+              pixel_Pointer += (dim - 2);
               j = sJ;
+
               //4.
-              pixel_Pointer += (dim - 2);
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -362,9 +374,11 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
+
               //5.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -377,9 +391,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
-              j++;
-              //6.
               pixel_Pointer++;
+              j++;
+
+              //6.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -393,9 +408,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_col = j;
               }
               i++;
-              j = sJ;
-              //7.
               pixel_Pointer += (dim - 2);
+              j = sJ;
+
+              //7.
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -408,9 +424,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //8.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -423,9 +440,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
+              pixel_Pointer++;
               j++;
+
               //9.
-              pixel_Pointer++;
               loop_pixel = *pixel_Pointer;
               looped_pixel_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
               //Set the intensity.
@@ -438,11 +456,10 @@ static pixel applyKernel(int dim, int x, int y, pixel *src, int kernel[3][3], in
                   max_row = i;
                   max_col = j;
               }
-              current_pixel = src[min_row * dim + min_col];
-              //Decrease the sum colors by the current pixel's results.
-              sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
-              current_pixel = src[max_row*dim + max_col];
-              sum.red -= (int) current_pixel.red, sum.green -= (int) current_pixel.green, sum.blue -= (int) current_pixel.blue;
+              pixel min_pixel = src[min_row * dim + min_col];
+              pixel max_pixel = src[max_row * dim + max_col];
+              sum.red -= (int) (min_pixel.red + max_pixel.red), sum.green -= (int) (min_pixel.green + max_pixel.green),
+              sum.blue -= (int) (min_pixel.blue + max_pixel.blue);
           }
           //Set the colors to their right value.
           if (sum.red >= 256 * kernelScale) {
